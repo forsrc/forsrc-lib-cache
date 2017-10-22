@@ -12,6 +12,8 @@ import org.jboss.cache.Cache;
 import org.jboss.cache.CacheFactory;
 import org.jboss.cache.DefaultCacheFactory;
 import org.jboss.cache.Fqn;
+import org.jboss.cache.config.CacheLoaderConfig;
+import org.jboss.cache.config.Configuration;
 
 public class JbossCacheMap<K extends Serializable, V extends Serializable> implements Map<K, V>, Closeable, Serializable {
 
@@ -22,7 +24,9 @@ public class JbossCacheMap<K extends Serializable, V extends Serializable> imple
 
     public JbossCacheMap(String name) {
         CacheFactory<K, V> factory = new DefaultCacheFactory<>();
-        this.cache = factory.createCache("config/jboss-cache.xml", false);
+        this.cache = factory.createCache("config/jboss-cache.xml", true);
+        Configuration config = cache.getConfiguration();
+        //config.setClusterName(appName);
         this.cache.create();
         this.cache.start();
         this.fqn = Fqn.fromString(name);

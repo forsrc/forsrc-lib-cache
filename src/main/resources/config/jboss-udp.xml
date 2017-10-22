@@ -9,7 +9,7 @@
 <config>
     <UDP bind_addr="${bind.address:127.0.0.1}"
          mcast_addr="${jgroups.udp.mcast_addr:127.0.0.1"
-         mcast_port="${jgroups.udp.mcast_port:99901}"
+         mcast_port="${jgroups.udp.mcast_port:45111}"
          tos="8"
          ucast_recv_buf_size="20000000"
          ucast_send_buf_size="640000"
@@ -66,6 +66,7 @@
                     min_threshold="0.20"/>
     <FRAG2 frag_size="60000"  />
     <!--pbcast.STREAMING_STATE_TRANSFER /-->
-    <pbcast.STATE_TRANSFER  />
-    <!-- pbcast.FLUSH  /-->
+    <!-- <pbcast.STATE_TRANSFER  /> -->
+    <pbcast.FLUSH  />
+    <RELAY site="nyc" bridge_props="jboss-jgroups-tcp.xml" />
 </config>
