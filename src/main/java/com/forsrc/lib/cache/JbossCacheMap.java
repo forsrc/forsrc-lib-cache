@@ -56,10 +56,6 @@ public class JbossCacheMap<K extends Serializable, V extends Serializable> imple
         return this.cache.getData(this.fqn).containsValue(value);
     }
 
-    public V get(K key) {
-        return this.cache.get(this.fqn, key);
-    }
-
     @Override
     public V get(Object key) {
         return this.cache.get(this.fqn, (K)key);
@@ -68,10 +64,6 @@ public class JbossCacheMap<K extends Serializable, V extends Serializable> imple
     @Override
     public V put(K key, V value) {
         return this.cache.put(this.fqn, key, value);
-    }
-
-    public V remove(K key) {
-        return this.cache.remove(this.fqn, key);
     }
 
     @Override
