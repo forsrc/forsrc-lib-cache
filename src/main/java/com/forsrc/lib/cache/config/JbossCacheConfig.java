@@ -15,14 +15,14 @@ public class JbossCacheConfig {
     @Value("spring.application.name")
     private String appName;
 
-    @Bean
+    @Bean(destroyMethod = "stop")
     public Cache<Serializable, Serializable> getCache() {
         CacheFactory<Serializable, Serializable> factory = new DefaultCacheFactory<>();
         Cache<Serializable, Serializable> cache = factory.createCache("config/jboss-cache.xml");
         org.jboss.cache.config.Configuration config = cache.getConfiguration();
         //config.setClusterName(appName);
+        cache.create();
         cache.start();
         return cache;
     }
-
 }

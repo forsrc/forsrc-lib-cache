@@ -31,6 +31,9 @@ public class JbossCacheTest {
         cache.put(fqn, "testFqn", "valueFqn");
         assertEquals(cache.get(fqn, "testFqn"), "valueFqn");
 
+        JbossCacheMap<String, String> map = new JbossCacheMap<>("/root/testMap");
+        map.put("test", "OK");
+        assertEquals(map.get("test"), "OK");
     }
 
     @After
