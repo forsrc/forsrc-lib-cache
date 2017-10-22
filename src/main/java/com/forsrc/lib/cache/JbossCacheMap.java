@@ -13,7 +13,9 @@ import org.jboss.cache.CacheFactory;
 import org.jboss.cache.DefaultCacheFactory;
 import org.jboss.cache.Fqn;
 
-public class JbossCacheMap<K extends Serializable, V extends Serializable> implements Map<K, V>, Closeable {
+public class JbossCacheMap<K extends Serializable, V extends Serializable> implements Map<K, V>, Closeable, Serializable {
+
+    private static final long serialVersionUID = -8628730492554773830L;
 
     private Cache<K, V> cache;
     private Fqn<String> fqn;
