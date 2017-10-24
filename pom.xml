@@ -21,6 +21,9 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
+        <spring-boot.version>1.4.0.RELEASE</spring-boot.version>
+        <infinispan.starters.version>1.0.0.Alpha1</infinispan.starters.version>
+        <infinispan.version>9.1.0.Final</infinispan.version>
     </properties>
 
     <dependencies>
@@ -34,14 +37,19 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.infinispan</groupId>
+            <artifactId>inifinispan-spring-boot-starter</artifactId>
+            <version>${infinispan.starters.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-core</artifactId>
+            <version>${infinispan.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.jboss.cache</groupId>
             <artifactId>jbosscache-core</artifactId>
             <version>3.2.2.GA</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jgroups</groupId>
-            <artifactId>jgroups</artifactId>
-            <version>3.0.11.Final</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
