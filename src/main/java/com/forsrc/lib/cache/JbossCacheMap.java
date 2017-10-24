@@ -14,7 +14,12 @@ import org.jboss.cache.DefaultCacheFactory;
 import org.jboss.cache.Fqn;
 import org.jboss.cache.config.CacheLoaderConfig;
 import org.jboss.cache.config.Configuration;
+import org.jboss.cache.notifications.annotation.CacheListener;
+import org.jboss.cache.notifications.annotation.CacheStarted;
+import org.jboss.cache.notifications.annotation.CacheStopped;
+import org.jboss.cache.notifications.event.Event;
 
+@CacheListener
 public class JbossCacheMap<K extends Serializable, V extends Serializable> implements Map<K, V>, Closeable, Serializable {
 
     private static final long serialVersionUID = -8628730492554773830L;
@@ -113,4 +118,9 @@ public class JbossCacheMap<K extends Serializable, V extends Serializable> imple
         this.cache.stop();
     }
 
+    @CacheStarted
+    @CacheStopped
+    public void cacheStartStopEvent(final Event e) {
+        System.out.println("---> " + e.toString());
+    }
 }

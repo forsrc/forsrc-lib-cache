@@ -196,7 +196,6 @@
 
    -->
 
-<!--
    <eviction wakeUpInterval="10000">
 
       <default algorithmClass="org.jboss.cache.eviction.LRUAlgorithm" eventQueueSize="200000">
@@ -222,7 +221,6 @@
       </region>
 
    </eviction>
--->
 
 
    <!--
