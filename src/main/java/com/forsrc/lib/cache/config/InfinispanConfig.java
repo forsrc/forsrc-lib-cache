@@ -6,14 +6,17 @@ import org.infinispan.configuration.cache.CacheMode;
 import org.infinispan.configuration.cache.Configuration;
 import org.infinispan.configuration.cache.ConfigurationBuilder;
 import org.infinispan.configuration.global.GlobalConfigurationBuilder;
+import org.infinispan.spring.provider.SpringEmbeddedCacheManagerFactoryBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 
 import infinispan.autoconfigure.embedded.InfinispanCacheConfigurer;
 import infinispan.autoconfigure.embedded.InfinispanGlobalConfigurer;
 
 @org.springframework.context.annotation.Configuration
+@EnableCaching
 public class InfinispanConfig {
 
     public static final String CACHE_NAME = "forsrc-cache";
@@ -45,5 +48,10 @@ public class InfinispanConfig {
 
             manager.defineConfiguration(CACHE_NAME, ispnConfig);
         };
+    }
+
+    @Bean
+    public SpringEmbeddedCacheManagerFactoryBean springCache() {
+        return new SpringEmbeddedCacheManagerFactoryBean();
     }
 }
