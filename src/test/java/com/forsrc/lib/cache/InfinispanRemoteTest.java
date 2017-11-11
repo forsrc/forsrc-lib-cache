@@ -12,6 +12,9 @@ import org.infinispan.client.hotrod.impl.ConfigurationProperties;
 import org.infinispan.configuration.cache.CacheMode;
 import org.infinispan.configuration.global.GlobalConfigurationBuilder;
 import org.infinispan.manager.DefaultCacheManager;
+import org.infinispan.server.hotrod.HotRodServer;
+import org.infinispan.server.hotrod.configuration.HotRodServerConfiguration;
+import org.infinispan.server.hotrod.configuration.HotRodServerConfigurationBuilder;
 import org.junit.Test;
 
 public class InfinispanRemoteTest {
@@ -25,8 +28,14 @@ public class InfinispanRemoteTest {
         // Initialize the cache manager
         DefaultCacheManager defaultCacheManager = new DefaultCacheManager(global.build(), configurationBuilder.build());
 
-        
-        
+        HotRodServerConfiguration hotrodConfig = new HotRodServerConfigurationBuilder()
+                .host("127.0.0.1")
+                .port(ConfigurationProperties.DEFAULT_HOTROD_PORT)
+                .topologyStateTransfer(false)
+                .build();
+        HotRodServer server = new HotRodServer();
+        server.start(hotrodConfig, defaultCacheManager);
+
         // Create a configuration for a locally-running server
         ConfigurationBuilder builder = new ConfigurationBuilder();
         builder.addServer().host("127.0.0.1").port(ConfigurationProperties.DEFAULT_HOTROD_PORT);
@@ -48,6 +57,7 @@ public class InfinispanRemoteTest {
         // Stop the cache manager and release all resources
         cacheManager.stop();
         defaultCacheManager.stop();
+        server.stop();
      }
 
      @ClientListener
